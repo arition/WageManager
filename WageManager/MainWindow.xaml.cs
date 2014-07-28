@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WageManager.Database;
+using WageManager.Base;
+using System.Data.Entity;
 
 namespace WageManager
 {
@@ -23,6 +26,14 @@ namespace WageManager
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var db = new DatabaseContext();
+            Database.Initializer.Initialize(db);
+            var result = db.Companys.OrderBy(c => c.name).ToList();
+            MessageBox.Show(result[0].name);
         }
     }
 }
