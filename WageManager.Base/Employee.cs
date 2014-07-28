@@ -4,8 +4,8 @@
     {
         public class Employee
         {
-            private int Id;
-            public int id
+            private long Id;
+            public long id
             {
                 get { return Id; }
                 set { Id = value; }

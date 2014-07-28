@@ -6,29 +6,36 @@ namespace WageManager
     {
         public class Wage
         {
-            private int Id;
-            public int id
+            private long Id;
+            public long id
             {
                 get { return Id; }
                 set { Id = value; }
             }
 
-            private int Userid;
-            public int userid
+            private long Userid;
+            public long userid
             {
                 get { return Userid; }
                 set { Userid = value; }
             }
 
-            private int CompanyId;
-            public int companyId
+            private long Companyid;
+            public long companyid
             {
-                get { return CompanyId; }
-                set { CompanyId = value; }
+                get { return Companyid; }
+                set { Companyid = value; }
+            }
+
+            private long Companyid_tax;
+            public long companyid_tax
+            {
+                get { return Companyid_tax; }
+                set { Companyid_tax = value; }
             }
 
             private DateTime WageRound;
-            public DateTime wageRround
+            public DateTime wageRound
             {
                 get { return WageRound; }
                 set { WageRound = value; }
