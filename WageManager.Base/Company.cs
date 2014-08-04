@@ -4,29 +4,29 @@
     {
         public class Company
         {
-            private long Id;
-            public long id
+            private long Companyid;
+            public long companyid
             {
-                get { return Id; }
-                set { Id = value; }
+                get { return Companyid; }
+                set { Companyid = value; }
             }
 
             private string Name;
-            public string name
+            public string 公司名
             {
                 get { return Name; }
                 set { Name = value; }
             }
 
             private float OvertimeSalary_Weekday;
-            public float overtimeSalary_Weekday
+            public float 平时加班工资
             {
                 get { return OvertimeSalary_Weekday; }
                 set { OvertimeSalary_Weekday = value; }
             }
 
             private float OvertimeSalary_Weekend;
-            public float overtimeSalary_Weekend
+            public float 周末加班工资
             {
                 get { return OvertimeSalary_Weekend; }
                 set { OvertimeSalary_Weekend = value; }

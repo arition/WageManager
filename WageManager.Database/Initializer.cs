@@ -15,15 +15,15 @@ namespace WageManager
                 File.Copy(Path.Combine("data", "data_backup.s3db"), Path.Combine("data", "data.s3db"));
                 var companys = new List<Company>
                 {
-                    new Company{name="典驰",overtimeSalary_Weekday=15,overtimeSalary_Weekend=15},
-                    new Company{name="优弧",overtimeSalary_Weekday=13.5f,overtimeSalary_Weekend=32}
+                    new Company{公司名="典驰", 平时加班工资=15, 周末加班工资=15},
+                    new Company{公司名="优弧", 平时加班工资=13.5f, 周末加班工资=32}
                 };
                 var employees = new List<Employee>
                 {
-                    new Employee{name="Testa",department="销售部",lastBaseSalary=1500},
-                    new Employee{name="Testb",department="销售部",lastBaseSalary=1600},
-                    new Employee{name="Testc",department="仓储部",lastBaseSalary=1500},
-                    new Employee{name="Testd",department="经理部",lastBaseSalary=2000}
+                    new Employee{姓名="Testa",部门="销售部",基础工资=1500},
+                    new Employee{姓名="Testb",部门="销售部",基础工资=1600},
+                    new Employee{姓名="Testc",部门="仓储部",基础工资=1500},
+                    new Employee{姓名="Testd",部门="经理部",基础工资=2000}
                 };
                 var wages = new List<Wage>
                 {

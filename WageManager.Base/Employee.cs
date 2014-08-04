@@ -4,55 +4,50 @@
     {
         public class Employee
         {
-            private long Id;
-            public long id
+            private long Employeeid;
+            public long employeeid
             {
-                get { return Id; }
-                set { Id = value; }
+                get { return Employeeid; }
+                set { Employeeid = value; }
             }
 
             private string Name;
-            public string name
+            public string 姓名
             {
                 get { return Name; }
                 set { Name = value; }
             }
 
             private string Department;
-
-            public string department
+            public string 部门
             {
                 get { return Department; }
                 set { Department = value; }
             }
 
             private float LastBaseSalary;
-
-            public float lastBaseSalary
+            public float 基础工资
             {
                 get { return LastBaseSalary; }
                 set { LastBaseSalary = value; }
             }
 
             private string BankCardNumber;
-
-            public string bankCardNumber
+            public string 银行卡号
             {
                 get { return BankCardNumber; }
                 set { BankCardNumber = value; }
             }
 
             private string Bank;
-
-            public string bank
+            public string 开户行
             {
                 get { return Bank; }
                 set { Bank = value; }
             }
 
             private string IdCardNumber;
-
-            public string idCardNumber
+            public string 身份证号
             {
                 get { return IdCardNumber; }
                 set { IdCardNumber = value; }

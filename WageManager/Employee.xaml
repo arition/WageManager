@@ -1,0 +1,16 @@
+﻿<controls:MetroWindow x:Class="WageManager.Employee"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="员工" Height="300" Width="670" Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing">
+    <Grid>
+        <DataGrid x:Name="DataGrid_employee" Visibility="Hidden">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="MenuItem_delete" Header="删除" Click="MenuItem_delete_Click"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+        <controls:ProgressRing x:Name="ProgressRing_employee" IsActive="True" Panel.ZIndex="1" />
+    </Grid>
+</controls:MetroWindow>

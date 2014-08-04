@@ -1,8 +1,62 @@
-﻿<Window x:Class="WageManager.MainWindow"
+﻿<controls:MetroWindow x:Class="WageManager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="WageManager" Height="400" Width="290" Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button Content="设置" />
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="btn_Employee" Style="{DynamicResource MetroCircleButtonStyle}" Width="60" Height="60" Margin="10,5,10,5" Click="btn_Employee_Click">
+                <Rectangle Height="25" Width="25">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_people_profile}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <TextBlock Text="员工" HorizontalAlignment="Center" Margin="10,5"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="btn_Company" Style="{DynamicResource MetroCircleButtonStyle}" Width="60" Height="60" Margin="10,5,10,5" Click="btn_Company_Click">
+                <Rectangle Height="25" Width="25">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_store}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <TextBlock Text="公司" HorizontalAlignment="Center" Margin="10,5"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Style="{DynamicResource MetroCircleButtonStyle}" Width="60" Height="60" Margin="10,5,10,5">
+                <Rectangle Height="25" Width="25">
+                    <Rectangle.Fill>
+                        <VisualBrush Visual="{StaticResource appbar_list_create}" />
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <TextBlock Text="生成报表" HorizontalAlignment="Center" Margin="10,5"/>
+        </StackPanel>
     </Grid>
-</Window>
+</controls:MetroWindow>
