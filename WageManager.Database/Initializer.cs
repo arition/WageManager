@@ -28,7 +28,7 @@ namespace WageManager
                 var wages = new List<Wage>
                 {
                     new Wage(){
-                        userid=1,
+                        employeeid=1,
                         companyid=0,
                         companyid_tax=1,
                         wageRound=new System.DateTime(2014,7,1),
@@ -47,7 +47,7 @@ namespace WageManager
                         allowance=0
                     },
                     new Wage(){
-                        userid=2,
+                        employeeid=2,
                         companyid=1,
                         companyid_tax=1,
                         wageRound=new System.DateTime(2014,7,1),

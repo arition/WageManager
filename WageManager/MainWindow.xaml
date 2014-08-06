@@ -49,7 +49,7 @@
             <TextBlock Text="公司" HorizontalAlignment="Center" Margin="10,5"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Style="{DynamicResource MetroCircleButtonStyle}" Width="60" Height="60" Margin="10,5,10,5">
+            <Button x:Name="btn_Wage" Style="{DynamicResource MetroCircleButtonStyle}" Width="60" Height="60" Margin="10,5,10,5" Click="btn_Wage_Click">
                 <Rectangle Height="25" Width="25">
                     <Rectangle.Fill>
                         <VisualBrush Visual="{StaticResource appbar_list_create}" />

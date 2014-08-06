@@ -6,18 +6,18 @@ namespace WageManager
     {
         public class Wage
         {
-            private long Id;
-            public long id
+            private long Wageid;
+            public long wageid
             {
-                get { return Id; }
-                set { Id = value; }
+                get { return Wageid; }
+                set { Wageid = value; }
             }
 
-            private long Userid;
-            public long userid
+            private long Employeeid;
+            public long employeeid
             {
-                get { return Userid; }
-                set { Userid = value; }
+                get { return Employeeid; }
+                set { Employeeid = value; }
             }
 
             private long Companyid;
@@ -125,13 +125,26 @@ namespace WageManager
                 set { AdjustmentDeduction = value; }
             }
 
+            private float MealBonus;
+            public float mealBonus
+            {
+                get { return MealBonus; }
+                set { MealBonus = value; }
+            }
+
+            private float HouseBonus;
+            public float houseBonus
+            {
+                get { return HouseBonus; }
+                set { HouseBonus = value; }
+            }
+
             private float Allowance;
             public float allowance
             {
                 get { return Allowance; }
                 set { Allowance = value; }
             }
-            
         }
     }
 }

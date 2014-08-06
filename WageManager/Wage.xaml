@@ -1,0 +1,98 @@
+﻿<controls:MetroWindow x:Class="WageManager.Wage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Wage" Height="400" Width="450" Loaded="MetroWindow_Loaded">
+    <Grid>
+        <controls:ProgressRing x:Name="ProgressRing_wage" IsActive="True" Panel.ZIndex="1"/>
+        <DockPanel x:Name="DockPanel_wage" LastChildFill="True" IsEnabled="False">
+            <StackPanel DockPanel.Dock="Bottom">
+                <WrapPanel HorizontalAlignment="Right">
+                    <Button Margin="10,5" Content="  预览  "/>
+                </WrapPanel>
+            </StackPanel>
+            <ScrollViewer>
+                <Grid Margin="0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="75*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="时间区间" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="0"/>
+                    <TextBox x:Name="TextBox_wageRound" Grid.Column="1" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
+
+                    <TextBlock Text="员工" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="1"/>
+                    <ComboBox x:Name="ComboBox_employeeid" Grid.Column="1" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1"/>
+
+                    <TextBlock Text="所属公司" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="2"/>
+                    <ComboBox x:Name="ComboBox_companyid" Grid.Column="1" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2"/>
+
+                    <TextBlock Text="报税公司" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="3"/>
+                    <ComboBox x:Name="ComboBox_companyid_tax" Grid.Column="1" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3"/>
+
+                    <TextBlock Text="基本薪金" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="4"/>
+                    <TextBox x:Name="TextBox_baseSalary" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="岗位薪金" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="5"/>
+                    <TextBox x:Name="TextBox_jobSalary" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="绩效奖金" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="6"/>
+                    <TextBox x:Name="TextBox_performanceBonus" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="6" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="项目奖金" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="7"/>
+                    <TextBox x:Name="TextBox_projectBonus" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="销售奖金" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="8"/>
+                    <TextBox x:Name="TextBox_saleBonus" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="8" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="全勤奖金" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="9"/>
+                    <TextBox x:Name="TextBox_attendanceBonus" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="9" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="加班费" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="10"/>
+                    <TextBox x:Name="TextBox_overtimeBonus" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="10" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="缺勤金额" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="11"/>
+                    <TextBox x:Name="TextBox_absenceSalary" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="11" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="调整费用" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="12"/>
+                    <TextBox x:Name="TextBox_adjustmentSalary" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="12" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="社保费" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="13"/>
+                    <TextBox x:Name="TextBox_socialWelfareDeduction" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="13" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="公积金" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="14"/>
+                    <TextBox x:Name="TextBox_publicFundDeduction" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="14" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="调整代扣费用" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="15"/>
+                    <TextBox x:Name="TextBox_adjustmentDeduction" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="15" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="饭贴" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="16"/>
+                    <TextBox x:Name="TextBox_mealBonus" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="16" VerticalAlignment="Center"/>
+
+                    <TextBlock Text="房帖" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="17"/>
+                    <TextBox x:Name="TextBox_houseBonus" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="17" VerticalAlignment="Center"/>
+                </Grid>
+            </ScrollViewer>
+        </DockPanel>
+    </Grid>
+</controls:MetroWindow>

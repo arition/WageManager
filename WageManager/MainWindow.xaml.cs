@@ -48,5 +48,11 @@ namespace WageManager
             var window_Company = new Company();
             window_Company.Show();
         }
+
+        private void btn_Wage_Click(object sender, RoutedEventArgs e)
+        {
+            var window_Wage = new Wage();
+            window_Wage.Show();
+        }
     }
 }
