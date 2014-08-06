@@ -2,7 +2,6 @@
 using System.Data.Entity;
 using WageManager.Base;
 using System.IO;
-
 namespace WageManager
 {
     namespace Database
@@ -25,13 +24,16 @@ namespace WageManager
                     new Employee{姓名="Testc",部门="仓储部",基础工资=1500},
                     new Employee{姓名="Testd",部门="经理部",基础工资=2000}
                 };
+                companys.ForEach(s => context.Companys.Add(s));
+                employees.ForEach(s => context.Employees.Add(s));
+                context.SaveChanges();
                 var wages = new List<Wage>
                 {
                     new Wage(){
-                        employeeid=1,
-                        companyid=0,
-                        companyid_tax=1,
-                        wageRound=new System.DateTime(2014,7,1),
+                        employee=context.Employees.Find(1),
+                        company=context.Companys.Find(1),
+                        company_tax=context.Companys.Find(1),
+                        wageRound=new System.DateTime(2014,5,1),
                         baseSalary=1500,
                         jobSalary=100,
                         performanceBonus=100,
@@ -47,10 +49,29 @@ namespace WageManager
                         allowance=0
                     },
                     new Wage(){
-                        employeeid=2,
-                        companyid=1,
-                        companyid_tax=1,
-                        wageRound=new System.DateTime(2014,7,1),
+                        employee=context.Employees.Find(1),
+                        company=context.Companys.Find(1),
+                        company_tax=context.Companys.Find(2),
+                        wageRound=new System.DateTime(2014,6,1),
+                        baseSalary=2000,
+                        jobSalary=100,
+                        performanceBonus=100,
+                        projectBonus=0,
+                        saleBonus=122.5f,
+                        attendanceBonus=10,
+                        overtimeBonus=5,
+                        absenceSalary=10,
+                        adjustmentSalary=0,
+                        socialWelfareDeduction=12.56f,
+                        publicFundDeduction=13.01f,
+                        adjustmentDeduction=0,
+                        allowance=0
+                    },
+                    new Wage(){
+                        employee=context.Employees.Find(2),
+                        company=context.Companys.Find(1),
+                        company_tax=context.Companys.Find(2),
+                        wageRound=new System.DateTime(2014,6,1),
                         baseSalary=2000,
                         jobSalary=500,
                         performanceBonus=200,
@@ -66,8 +87,6 @@ namespace WageManager
                         allowance=0
                     }
                 };
-                companys.ForEach(s => context.Companys.Add(s));
-                employees.ForEach(s => context.Employees.Add(s));
                 wages.ForEach(s => context.Wages.Add(s));
                 context.SaveChanges();
             }

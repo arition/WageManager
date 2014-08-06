@@ -16,6 +16,7 @@ using WageManager.Database;
 using WageManager.Base;
 using System.Data.Entity;
 using MahApps.Metro.Controls;
+using log4net;
 
 namespace WageManager
 {
@@ -24,6 +25,7 @@ namespace WageManager
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public MainWindow()
         {
             InitializeComponent();
@@ -32,6 +34,7 @@ namespace WageManager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //var db = new DatabaseContext();
+            //db.Database.Log = (s) => Log.Info(s);
             //Database.Initializer.Initialize(db);
             //var result = db.Companys.OrderBy(c => c.name).ToList();
             //MessageBox.Show(result[0].name);

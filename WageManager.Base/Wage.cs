@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WageManager
 {
@@ -13,25 +14,25 @@ namespace WageManager
                 set { Wageid = value; }
             }
 
-            private long Employeeid;
-            public long employeeid
+            private Employee Employee;
+            public virtual Employee employee
             {
-                get { return Employeeid; }
-                set { Employeeid = value; }
+                get { return Employee; }
+                set { Employee = value; }
             }
 
-            private long Companyid;
-            public long companyid
+            private Company Company;
+            public virtual Company company
             {
-                get { return Companyid; }
-                set { Companyid = value; }
+                get { return Company; }
+                set { Company = value; }
             }
 
-            private long Companyid_tax;
-            public long companyid_tax
+            private Company Company_tax;
+            public virtual Company company_tax
             {
-                get { return Companyid_tax; }
-                set { Companyid_tax = value; }
+                get { return Company_tax; }
+                set { Company_tax = value; }
             }
 
             private DateTime WageRound;

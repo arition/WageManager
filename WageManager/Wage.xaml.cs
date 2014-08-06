@@ -32,13 +32,8 @@ namespace WageManager
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            
-            /*IQueryable<Base.Wage> lastMonthWage = db.Wages.Where(o => (o.wageRound.Year == DateTime.Now.Year) && (DateTime.Now.Month - o.wageRound.Month == 2));
-            var ww = db.Employees.Select(oe => new
-            {
-                oe.姓名,oe.基础工资,
-                wage=lastMonthWage.Where(ow=>ow.employeeid==oe.employeeid).FirstOrDefault()
-            });*/
+            //IQueryable<Base.Wage> lastMonthWage = db.Wages.Where(o => (o.wageRound.Year == DateTime.Now.Year) && (DateTime.Now.Month - o.wageRound.Month == 2));
+            //var ww = db.Employees;
         }
     }
 }

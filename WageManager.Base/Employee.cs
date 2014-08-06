@@ -1,4 +1,5 @@
-﻿namespace WageManager
+﻿using System.Collections.Generic;
+namespace WageManager
 {
     namespace Base
     {
@@ -52,7 +53,8 @@
                 get { return IdCardNumber; }
                 set { IdCardNumber = value; }
             }
-            
+
+            public virtual ICollection<Wage> Wages { get; set; }
         }
     }
 }
