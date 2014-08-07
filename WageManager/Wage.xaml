@@ -8,7 +8,7 @@
         <DockPanel x:Name="DockPanel_wage" LastChildFill="True" IsEnabled="False">
             <StackPanel DockPanel.Dock="Bottom">
                 <WrapPanel HorizontalAlignment="Right">
-                    <Button Margin="10,5" Content="  预览  "/>
+                    <Button x:Name="btm_preview" Margin="10,5" Content="  预览  " Click="btm_preview_Click"/>
                 </WrapPanel>
             </StackPanel>
             <ScrollViewer>
@@ -42,13 +42,13 @@
                     <TextBox x:Name="TextBox_wageRound" Grid.Column="1" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
 
                     <TextBlock Text="员工" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="1"/>
-                    <ComboBox x:Name="ComboBox_employeeid" Grid.Column="1" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1"/>
+                    <ComboBox x:Name="ComboBox_employeeid" Grid.Column="1" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" DisplayMemberPath="employee.姓名" SelectionChanged="ComboBox_employeeid_SelectionChanged"/>
 
                     <TextBlock Text="所属公司" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="2"/>
-                    <ComboBox x:Name="ComboBox_companyid" Grid.Column="1" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2"/>
+                    <ComboBox x:Name="ComboBox_companyid" Grid.Column="1" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" DisplayMemberPath="公司名"/>
 
                     <TextBlock Text="报税公司" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="3"/>
-                    <ComboBox x:Name="ComboBox_companyid_tax" Grid.Column="1" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3"/>
+                    <ComboBox x:Name="ComboBox_companyid_tax" Grid.Column="1" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" DisplayMemberPath="公司名"/>
 
                     <TextBlock Text="基本薪金" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0" Grid.Column="0" Grid.Row="4"/>
                     <TextBox x:Name="TextBox_baseSalary" Margin="10,0,0,0" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"/>
