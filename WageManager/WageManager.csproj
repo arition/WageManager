@@ -157,6 +157,10 @@
       <Project>{2ba6f607-d81a-4ed5-b7eb-5465d4667609}</Project>
       <Name>WageManager.Database</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WageManager.ExcelCOM\WageManager.ExcelCOM.csproj">
+      <Project>{08843012-da17-4047-b0a9-2df6f86c2d78}</Project>
+      <Name>WageManager.ExcelCOM</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\WindowsIcons-license.txt" />

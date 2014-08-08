@@ -16,6 +16,7 @@ using System.Data.Entity;
 using MahApps.Metro.Controls;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using WageManager.ExcelCOM;
 
 namespace WageManager
 {
@@ -80,6 +81,7 @@ namespace WageManager
                     ComboBox_employeeid.ItemsSource = WageList;
                     ComboBox_companyid.ItemsSource = companys;
                     ComboBox_companyid_tax.ItemsSource = companys;
+                    ComboBox_employeeid.SelectedIndex = 0;
                     ProgressRing_wage.IsActive = false;
                     DockPanel_wage.IsEnabled = true;
                 }));
@@ -111,11 +113,12 @@ namespace WageManager
 
         private void btm_preview_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Base.Wage wage in WageList)
+            /*foreach (Base.Wage wage in WageList)
             {
                 db.Wages.Add(wage);
             }
-            db.SaveChanges();
+            db.SaveChanges();*/
+            ExcelCOM.CreateExcel.Create(WageList.ToList<Base.Wage>());
         }
     }
 }

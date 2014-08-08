@@ -33,9 +33,9 @@ namespace WageManager
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //var db = new DatabaseContext();
+            var db = new DatabaseContext();
             //db.Database.Log = (s) => Log.Info(s);
-            //Database.Initializer.Initialize(db);
+            Database.Initializer.Initialize(db);
             //var result = db.Companys.OrderBy(c => c.name).ToList();
             //MessageBox.Show(result[0].name);
         }
