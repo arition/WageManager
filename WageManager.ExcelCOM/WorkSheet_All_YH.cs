@@ -1,35 +1,31 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using Microsoft.Office.Interop.Excel;
-using WageManager.Base;
 using System.Drawing;
+using System.Linq;
+using WageManager.Base;
 
 namespace WageManager.ExcelCOM
 {
-    class WorkSheet_First
+    class WorkSheet_All_YH
     {
         public static void Create(Worksheet ws, List<Wage> WageList)
         {
             int currentRow = 10;
             int departmentStartRow = 11;
             bool departmentFlag = false;
-            int manageDeparmentWageIndex = 0;
             List<int> TotalWageList = new List<int>();
             string temp_department = "";
             ws.Cells[6, 3] = DateTime.Now.Year + "年" + (DateTime.Now.Month - 1) + "月";
-            foreach (Wage wage in WageList.Where((s) => s.company.公司名 != "优弧"))
+            foreach (Wage wage in WageList.Where((s) => s.company.公司名.Contains("优弧")))
             {
                 if (temp_department != wage.employee.部门)
                 {
                     //填充小计
                     if (departmentFlag)
                     {
-                        ws.get_Range("B" + currentRow, "Q" + currentRow).NumberFormat = "0.00";
-                        ws.get_Range("A" + currentRow, "R" + currentRow).Interior.Color = ColorTranslator.ToOle(Color.LightYellow);
+                        ws.get_Range("B" + currentRow, "S" + currentRow).NumberFormat = "0.00";
+                        ws.get_Range("A" + currentRow, "S" + currentRow).Interior.Color = ColorTranslator.ToOle(Color.LightYellow);
                         ws.Cells[currentRow, 1] = "小计";
                         ws.Cells[currentRow, 2] = "=SUM(B" + departmentStartRow + ":B" + (currentRow - 1) + ")";
                         ws.Cells[currentRow, 3] = "=SUM(C" + departmentStartRow + ":C" + (currentRow - 1) + ")";
@@ -47,46 +43,48 @@ namespace WageManager.ExcelCOM
                         ws.Cells[currentRow, 15] = "=SUM(O" + departmentStartRow + ":O" + (currentRow - 1) + ")";
                         ws.Cells[currentRow, 16] = "=SUM(P" + departmentStartRow + ":P" + (currentRow - 1) + ")";
                         ws.Cells[currentRow, 17] = "=SUM(Q" + departmentStartRow + ":Q" + (currentRow - 1) + ")";
+                        ws.Cells[currentRow, 18] = "=SUM(R" + departmentStartRow + ":R" + (currentRow - 1) + ")";
+                        ws.Cells[currentRow, 19] = "=SUM(S" + departmentStartRow + ":S" + (currentRow - 1) + ")";
                         departmentStartRow = currentRow + 2;
-                        if (temp_department == "管理部") { manageDeparmentWageIndex = currentRow; }
-                        else { TotalWageList.Add(currentRow); }
+                        TotalWageList.Add(currentRow);
                         currentRow++;
                     }
                     //填充部门
                     departmentFlag = true;
-                    Range range = ws.get_Range("A" + currentRow, "R" + currentRow);
+                    Range range = ws.get_Range("A" + currentRow, "S" + currentRow);
                     range.Merge(false);
                     ws.Cells[currentRow, 1] = wage.employee.部门;
                     currentRow++;
                     temp_department = wage.employee.部门;
                 }
                 //填充个人数据
-                ws.get_Range("B" + currentRow, "Q" + currentRow).NumberFormat = "0.00";
+                ws.get_Range("B" + currentRow, "S" + currentRow).NumberFormat = "0.00";
                 ws.Cells[currentRow, 1] = wage.employee.姓名;
                 ws.Cells[currentRow, 2] = wage.baseSalary;
                 ws.Cells[currentRow, 3] = wage.jobSalary;
                 ws.Cells[currentRow, 4] = wage.performanceBonus;
-                ws.Cells[currentRow, 5] = wage.projectBonus;
-                ws.Cells[currentRow, 6] = wage.saleBonus;
-                ws.Cells[currentRow, 7] = wage.attendanceBonus;
-                ws.Cells[currentRow, 8] = wage.overtimeBonus;
-                ws.Cells[currentRow, 9] = wage.absenceSalary;
-                ws.Cells[currentRow, 10] = wage.adjustmentSalary;
-                ws.Cells[currentRow, 11] = "=SUM(B" + currentRow + ":J" + currentRow + ")";
-                ws.Cells[currentRow, 12] = wage.socialWelfareDeduction;
-                ws.Cells[currentRow, 13] = wage.publicFundDeduction;
-                ws.Cells[currentRow, 14] = 0;
-                ws.Cells[currentRow, 15] = wage.adjustmentDeduction;
-                ws.Cells[currentRow, 16] = wage.mealBonus;
-                ws.Cells[currentRow, 17] = "=K" + currentRow + "-L" + currentRow + "-M" + currentRow + "-N" + currentRow + "-O" + currentRow + "+P" + currentRow;
-                ws.Cells[currentRow, 18] = wage.company_tax.公司名;
+                ws.Cells[currentRow, 5] = wage.houseBonus;
+                ws.Cells[currentRow, 6] = wage.projectBonus;
+                ws.Cells[currentRow, 7] = wage.saleBonus;
+                ws.Cells[currentRow, 8] = wage.attendanceBonus;
+                ws.Cells[currentRow, 9] = wage.overtimeBonus;
+                ws.Cells[currentRow, 10] = wage.absenceSalary;
+                ws.Cells[currentRow, 11] = wage.mealBonus;
+                ws.Cells[currentRow, 12] = wage.adjustmentSalary;
+                ws.Cells[currentRow, 13] = "=SUM(B" + currentRow + ":L" + currentRow + ")";
+                ws.Cells[currentRow, 14] = wage.socialWelfareDeduction;
+                ws.Cells[currentRow, 15] = wage.publicFundDeduction;
+                ws.Cells[currentRow, 16] = Utils.CalcTax(wage);
+                ws.Cells[currentRow, 17] = wage.adjustmentDeduction;
+                ws.Cells[currentRow, 18] = 0;
+                ws.Cells[currentRow, 19] = "=M" + currentRow + "-N" + currentRow + "-O" + currentRow + "-P" + currentRow + "-Q" + currentRow + "+R" + currentRow;
                 currentRow++;
             }
             //填充最后一个小计
             if (departmentFlag)
             {
-                ws.get_Range("B" + currentRow, "Q" + currentRow).NumberFormat = "0.00";
-                ws.get_Range("A" + currentRow, "R" + currentRow).Interior.Color = ColorTranslator.ToOle(Color.LightYellow);
+                ws.get_Range("B" + currentRow, "S" + currentRow).NumberFormat = "0.00";
+                ws.get_Range("A" + currentRow, "S" + currentRow).Interior.Color = ColorTranslator.ToOle(Color.LightYellow);
                 ws.Cells[currentRow, 1] = "小计";
                 ws.Cells[currentRow, 2] = "=SUM(B" + departmentStartRow + ":B" + (currentRow - 1) + ")";
                 ws.Cells[currentRow, 3] = "=SUM(C" + departmentStartRow + ":C" + (currentRow - 1) + ")";
@@ -104,14 +102,15 @@ namespace WageManager.ExcelCOM
                 ws.Cells[currentRow, 15] = "=SUM(O" + departmentStartRow + ":O" + (currentRow - 1) + ")";
                 ws.Cells[currentRow, 16] = "=SUM(P" + departmentStartRow + ":P" + (currentRow - 1) + ")";
                 ws.Cells[currentRow, 17] = "=SUM(Q" + departmentStartRow + ":Q" + (currentRow - 1) + ")";
+                ws.Cells[currentRow, 18] = "=SUM(R" + departmentStartRow + ":R" + (currentRow - 1) + ")";
+                ws.Cells[currentRow, 19] = "=SUM(S" + departmentStartRow + ":S" + (currentRow - 1) + ")";
                 departmentStartRow = currentRow + 2;
-                if (temp_department == "管理部") { manageDeparmentWageIndex = currentRow; }
-                else { TotalWageList.Add(currentRow); }
+                TotalWageList.Add(currentRow);
                 currentRow++;
             }
             //填充合计
-            ws.get_Range("B" + currentRow, "Q" + currentRow).NumberFormat = "0.00";
-            ws.get_Range("A" + currentRow, "R" + currentRow).Interior.Color = ColorTranslator.ToOle(Color.FromArgb(255, 204, 0));
+            ws.get_Range("B" + currentRow, "S" + currentRow).NumberFormat = "0.00";
+            ws.get_Range("A" + currentRow, "S" + currentRow).Interior.Color = ColorTranslator.ToOle(Color.FromArgb(255, 204, 0));
             string allTotalWageCellAlgorithm = "=_Column_" + string.Join("+_Column_", TotalWageList.ToArray());
             ws.Cells[currentRow, 1] = "合计";
             ws.Cells[currentRow, 2] = allTotalWageCellAlgorithm.Replace("_Column_", "B");
@@ -130,32 +129,12 @@ namespace WageManager.ExcelCOM
             ws.Cells[currentRow, 15] = allTotalWageCellAlgorithm.Replace("_Column_", "O");
             ws.Cells[currentRow, 16] = allTotalWageCellAlgorithm.Replace("_Column_", "P");
             ws.Cells[currentRow, 17] = allTotalWageCellAlgorithm.Replace("_Column_", "Q");
-            currentRow++;
-            //填充全部合计
-            ws.get_Range("B" + currentRow, "Q" + currentRow).NumberFormat = "0.00";
-            ws.get_Range("A" + currentRow, "R" + currentRow).Interior.Color = ColorTranslator.ToOle(Color.FromArgb(255, 153, 204));
-            allTotalWageCellAlgorithm = allTotalWageCellAlgorithm + "+_Column_" + manageDeparmentWageIndex;
-            ws.Cells[currentRow, 1] = "合计";
-            ws.Cells[currentRow, 2] = allTotalWageCellAlgorithm.Replace("_Column_", "B");
-            ws.Cells[currentRow, 3] = allTotalWageCellAlgorithm.Replace("_Column_", "C");
-            ws.Cells[currentRow, 4] = allTotalWageCellAlgorithm.Replace("_Column_", "D");
-            ws.Cells[currentRow, 5] = allTotalWageCellAlgorithm.Replace("_Column_", "E");
-            ws.Cells[currentRow, 6] = allTotalWageCellAlgorithm.Replace("_Column_", "F");
-            ws.Cells[currentRow, 7] = allTotalWageCellAlgorithm.Replace("_Column_", "G");
-            ws.Cells[currentRow, 8] = allTotalWageCellAlgorithm.Replace("_Column_", "H");
-            ws.Cells[currentRow, 9] = allTotalWageCellAlgorithm.Replace("_Column_", "I");
-            ws.Cells[currentRow, 10] = allTotalWageCellAlgorithm.Replace("_Column_", "J");
-            ws.Cells[currentRow, 11] = allTotalWageCellAlgorithm.Replace("_Column_", "K");
-            ws.Cells[currentRow, 12] = allTotalWageCellAlgorithm.Replace("_Column_", "L");
-            ws.Cells[currentRow, 13] = allTotalWageCellAlgorithm.Replace("_Column_", "M");
-            ws.Cells[currentRow, 14] = allTotalWageCellAlgorithm.Replace("_Column_", "N");
-            ws.Cells[currentRow, 15] = allTotalWageCellAlgorithm.Replace("_Column_", "O");
-            ws.Cells[currentRow, 16] = allTotalWageCellAlgorithm.Replace("_Column_", "P");
-            ws.Cells[currentRow, 16] = allTotalWageCellAlgorithm.Replace("_Column_", "Q");
+            ws.Cells[currentRow, 18] = allTotalWageCellAlgorithm.Replace("_Column_", "R");
+            ws.Cells[currentRow, 19] = allTotalWageCellAlgorithm.Replace("_Column_", "S");
             //设置边框
-            ws.get_Range("A10", "R" + currentRow).Borders.Weight = XlBorderWeight.xlThin;
-            ws.get_Range("A10", "R" + currentRow).Borders.LineStyle = XlLineStyle.xlContinuous;
-            ws.get_Range("A10", "R" + currentRow).BorderAround2(LineStyle: XlLineStyle.xlContinuous, Weight: XlBorderWeight.xlMedium);
+            ws.get_Range("A10", "S" + currentRow).Borders.Weight = XlBorderWeight.xlThin;
+            ws.get_Range("A10", "S" + currentRow).Borders.LineStyle = XlLineStyle.xlContinuous;
+            ws.get_Range("A10", "S" + currentRow).BorderAround2(LineStyle: XlLineStyle.xlContinuous, Weight: XlBorderWeight.xlMedium);
         }
     }
 }

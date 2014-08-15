@@ -43,8 +43,16 @@
   <ItemGroup>
     <Compile Include="CreateExcel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WorkSheet_Second.cs" />
-    <Compile Include="WorkSheet_First.cs" />
+    <Compile Include="WorkSheet_Absence.cs" />
+    <Compile Include="WorkSheet_AllSalary_YH.cs" />
+    <Compile Include="WorkSheet_AllSalary_DWDC.cs" />
+    <Compile Include="WorkSheet_All_YH.cs" />
+    <Compile Include="WorkSheet_All_DWDC.cs" />
+    <Compile Include="WorkSheet_Individual_Wage_YH.cs" />
+    <Compile Include="WorkSheet_Individual_Wage_DWDC.cs" />
+    <Compile Include="WorkSheet_Overtime.cs" />
+    <Compile Include="WorkSheet_ProjectBonus.cs" />
+    <Compile Include="WorkSheet_Tax.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WageManager.Base\WageManager.Base.csproj">

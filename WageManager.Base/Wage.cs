@@ -1,12 +1,22 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 
 namespace WageManager
 {
     namespace Base
     {
-        public class Wage
+        public class Wage:INotifyPropertyChanged
         {
+            public event PropertyChangedEventHandler PropertyChanged;
+            private void NotifyPropertyChanged(String propertyName = "")
+            {
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                }
+            }
+
             private long Wageid;
             public long wageid
             {
@@ -84,11 +94,55 @@ namespace WageManager
                 set { AttendanceBonus = value; }
             }
 
+            private float Overtime_weekDay;
+            public float overtime_weekDay
+            {
+                get { return Overtime_weekDay; }
+                set
+                {
+                    Overtime_weekDay = value;
+                    try
+                    {
+                        overtimeBonus = System.Convert.ToSingle(Math.Round(System.Convert.ToDouble(overtime_weekDay * company.平时加班工资 + overtime_weekEnd * company.周末加班工资), 2));
+                    }
+                    catch { }
+                    NotifyPropertyChanged("overtimeBonus");
+                }
+            }
+
+            private float Overtime_weekEnd;
+            public float overtime_weekEnd
+            {
+                get { return Overtime_weekEnd; }
+                set
+                {
+                    Overtime_weekEnd = value;
+                    try
+                    {
+                        overtimeBonus = System.Convert.ToSingle(Math.Round(System.Convert.ToDouble(overtime_weekDay * company.平时加班工资 + overtime_weekEnd * company.周末加班工资), 2));
+                    }
+                    catch { }
+                    NotifyPropertyChanged("overtimeBonus");
+                }
+            }
+
             private float OvertimeBonus;
             public float overtimeBonus
             {
                 get { return OvertimeBonus; }
                 set { OvertimeBonus = value; }
+            }
+
+            private float AbsenceTime;
+            public float absenceTime
+            {
+                get { return AbsenceTime; }
+                set
+                {
+                    AbsenceTime = value;
+                    absenceSalary = System.Convert.ToSingle(Math.Round(System.Convert.ToDouble(absenceTime * (baseSalary / 165f)), 2));
+                    NotifyPropertyChanged("absenceSalary");
+                }
             }
 
             private float AbsenceSalary;
@@ -145,6 +199,13 @@ namespace WageManager
             {
                 get { return Allowance; }
                 set { Allowance = value; }
+            }
+
+            private float Tax;
+            public float tax
+            {
+                get { return Tax; }
+                set { Tax = value; }
             }
         }
     }
