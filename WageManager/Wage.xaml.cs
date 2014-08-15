@@ -51,29 +51,42 @@ namespace WageManager
         {
             Task.Factory.StartNew(() =>
             {
+                db.Companys.Load();
                 ObservableCollection<Base.Company> companys = db.Companys.Local;
                 db.Employees.ToList().ForEach(d =>
                 {
-                    Base.Wage wage_old = d.Wages.Where(o => (o.wageRound.Year == DateTime.Now.Year) && (DateTime.Now.Month - o.wageRound.Month == 2)).FirstOrDefault();
                     Base.Wage wage;
-                    if (wage_old == null)
+                    wage = d.Wages.Where(o => (o.wageRound.Year == DateTime.Now.Year) && (DateTime.Now.Month - o.wageRound.Month == 1)).FirstOrDefault();
+                    if (wage == null)
                     {
-                        wage = new Base.Wage() { employee = d, baseSalary = d.基础工资 };
-                    }
-                    else
-                    {
-                        wage = new Base.Wage()
+                        Base.Wage wage_old = d.Wages.Where(o => (o.wageRound.Year == DateTime.Now.Year) && (DateTime.Now.Month - o.wageRound.Month == 2)).FirstOrDefault();
+                        if (wage_old == null)
                         {
-                            employee = d,
-                            baseSalary = d.基础工资,
-                            company = wage_old.company,
-                            company_tax = wage_old.company_tax,
-                            jobSalary = wage_old.jobSalary,
-                            houseBonus = wage_old.houseBonus,
-                            mealBonus = wage_old.mealBonus
-                        };
+                            wage = new Base.Wage()
+                            {
+                                employee = d,
+                                baseSalary = d.基础工资,
+                                wageRound = DateTime.Now.AddMonths(-1)
+                            };
+                        }
+                        else
+                        {
+                            wage = new Base.Wage()
+                            {
+                                employee = d,
+                                baseSalary = d.基础工资,
+                                company = wage_old.company,
+                                company_tax = wage_old.company_tax,
+                                jobSalary = wage_old.jobSalary,
+                                houseBonus = wage_old.houseBonus,
+                                mealBonus = wage_old.mealBonus,
+                                socialWelfareDeduction = wage_old.socialWelfareDeduction,
+                                publicFundDeduction = wage_old.publicFundDeduction,
+                                wageRound = DateTime.Now.AddMonths(-1)
+                            };
+                        }
+                        db.Wages.Add(wage);
                     }
-                    wage.wageRound = DateTime.Now.AddMonths(-1);
                     WageList.Add(wage);
                 });
                 this.Dispatcher.Invoke(new Action(() =>
@@ -102,7 +115,10 @@ namespace WageManager
             TextBox_saleBonus.SetBinding(TextBox.TextProperty, new Binding() { Path = new PropertyPath("saleBonus"), Source = currentWage });
             TextBox_attendanceBonus.SetBinding(TextBox.TextProperty, new Binding() { Path = new PropertyPath("attendanceBonus"), Source = currentWage });
             TextBox_overtimeBonus.SetBinding(TextBox.TextProperty, new Binding() { Path = new PropertyPath("overtimeBonus"), Source = currentWage });
+            TextBox_overtime_weekDay.SetBinding(TextBox.TextProperty, new Binding() { Path = new PropertyPath("overtime_weekDay"), Source = currentWage });
+            TextBox_overtime_weekEnd.SetBinding(TextBox.TextProperty, new Binding() { Path = new PropertyPath("overtime_weekEnd"), Source = currentWage });
             TextBox_absenceSalary.SetBinding(TextBox.TextProperty, new Binding() { Path = new PropertyPath("absenceSalary"), Source = currentWage });
+            TextBox_absenceTime.SetBinding(TextBox.TextProperty, new Binding() { Path = new PropertyPath("absenceTime"), Source = currentWage });
             TextBox_adjustmentSalary.SetBinding(TextBox.TextProperty, new Binding() { Path = new PropertyPath("adjustmentSalary"), Source = currentWage });
             TextBox_socialWelfareDeduction.SetBinding(TextBox.TextProperty, new Binding() { Path = new PropertyPath("socialWelfareDeduction"), Source = currentWage });
             TextBox_publicFundDeduction.SetBinding(TextBox.TextProperty, new Binding() { Path = new PropertyPath("publicFundDeduction"), Source = currentWage });
@@ -113,12 +129,56 @@ namespace WageManager
 
         private void btm_preview_Click(object sender, RoutedEventArgs e)
         {
-            /*foreach (Base.Wage wage in WageList)
+            ProgressRing_wage.IsActive = true;
+            DockPanel_wage.IsEnabled = false;
+            Task.Factory.StartNew(() =>
             {
-                db.Wages.Add(wage);
+                db.SaveChanges();
+                ExcelCOM.CreateExcel.Create(WageList.ToList<Base.Wage>());
+                this.Dispatcher.Invoke(new Action(() =>
+                {
+                    ProgressRing_wage.IsActive = false;
+                    DockPanel_wage.IsEnabled = true;
+                }));
+            });
+        }
+
+        private void Grid_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (e.OriginalSource == TextBox_overtimeBonus || e.OriginalSource == TextBox_overtime_weekDay || e.OriginalSource == TextBox_overtime_weekEnd)
+            {
+                Grid_overtime_weekDay.Visibility = Visibility.Visible;
+                Grid_overtime_weekEnd.Visibility = Visibility.Visible;
             }
-            db.SaveChanges();*/
-            ExcelCOM.CreateExcel.Create(WageList.ToList<Base.Wage>());
+            else
+            {
+                Grid_overtime_weekDay.Visibility = Visibility.Collapsed;
+                Grid_overtime_weekEnd.Visibility = Visibility.Collapsed;
+            }
+
+            if (e.OriginalSource == TextBox_absenceSalary || e.OriginalSource == TextBox_absenceTime)
+            {
+                Grid_absenceTime.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Grid_absenceTime.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void TextBox_overtime_weekDay_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+
+        private void TextBox_overtime_weekEnd_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_absenceTime_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
